@@ -2,12 +2,14 @@ import os
 
 log = "BearPaint 3.3\n"
 
+
 def save_log(log_string):
     text_file = open("C:/bearpaint/logs/log.txt", "w")
     text_file.write(log_string)
     text_file.close()
 
 path = "C:/bearpaint/images"
+
 try:
     os.makedirs(path)
 except:
@@ -39,6 +41,7 @@ except:
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+GRAY = (175, 175, 175)
 PINK = (240, 98, 145)
 BLUE = (0, 30, 255)
 screen_size = (1920, 1080)
@@ -46,16 +49,16 @@ screen_size = (1920, 1080)
 name = input("Name?")
 log += "Filename: " + name + "\n"
 
-brush_size_width = int(input("Brush size width?"))
-brush_size_height = int(input("Brush size height"))
-eraser_size_width = int(input("Eraser size width?"))
-eraser_size_height = int(input("Eraser size height"))
+brush_size = int(input("Brush size ?"))
 
-log += "Sizes: " + str(brush_size_width) + " " + str(brush_size_height) + " " +  str(eraser_size_width) + " " + str(eraser_size_height) + "\n"
+eraser_size = int(input("Eraser size ?"))
 
-def draw_pixel_at_mouse(color, brush_size_width, brush_size_height, surface):
+
+log += "Sizes: " + str(brush_size) + " " + str(eraser_size) + "\n"
+
+def draw_pixel_at_mouse(color, brush_size, surface):
     mouse_x_pos, mouse_y_pos = pygame.mouse.get_pos()
-    pygame.draw.rect(surface, color, pygame.Rect(mouse_x_pos, mouse_y_pos, brush_size_width, brush_size_height))
+    pygame.draw.circle(surface, color, (mouse_x_pos, mouse_y_pos), brush_size)
 
 def create_custom_color():
     custom_color_R = int(input("Red value?\n"))
@@ -145,6 +148,8 @@ for i in range(0, 255):
 
 save_log(log)
 
+first_pos_for_line = (0, 0)
+
 while True :
     save_log(log)
     try:
@@ -169,10 +174,10 @@ while True :
             quit()
 
         if pygame.mouse.get_pressed(num_buttons=3)[0]:  #LEFT mouse
-            draw_pixel_at_mouse(current_color,brush_size_width, brush_size_height, display_surface)
+            draw_pixel_at_mouse(current_color,brush_size, display_surface)
 
         if pygame.mouse.get_pressed(num_buttons=3)[2]: #RIGHT mouse
-            draw_pixel_at_mouse(WHITE, eraser_size_width,eraser_size_height, display_surface)
+            draw_pixel_at_mouse(WHITE, eraser_size, display_surface)
 
         if event.type == pygame.KEYDOWN:
             if pressed[pygame.K_c]:
@@ -212,6 +217,20 @@ while True :
                     display_surface.blit(loaded_image, pygame.mouse.get_pos())
                 except:
                     log += "Loading Error\n"
+
+            if first_pos_for_line != (0, 0):
+                if pressed[pygame.K_i]:
+                    pygame.draw.circle(display_surface, WHITE, first_pos_for_line, 8)
+
+                    pygame.draw.line(display_surface, current_color, first_pos_for_line, pygame.mouse.get_pos(), brush_size)
+
+                    first_pos_for_line = (0,0)
+
+            elif first_pos_for_line == (0, 0):
+                first_pos_for_line = pygame.mouse.get_pos()
+                draw_pixel_at_mouse(GRAY, 8, display_surface)
+
+
 
     pygame.display.update()
 
