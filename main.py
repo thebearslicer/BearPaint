@@ -1,10 +1,11 @@
-import pygame
-import pyautogui
 import os
 
-pygame.init()
+log = "BearPaint 3.3\n"
 
-log = "BearPaint 3.2\n"
+def save_log(log_string):
+    text_file = open("C:/bearpaint/logs/log.txt", "w")
+    text_file.write(log_string)
+    text_file.close()
 
 path = "C:/bearpaint/images"
 try:
@@ -18,6 +19,23 @@ try:
 except:
     log += "C:/bearpaint/logs already found\n"
 
+
+try:
+    import pygame
+except:
+    log += "Pygame not installed error\n"
+
+try:
+    import pyautogui
+except:
+    log += "Pyautogui not installed error\n"
+
+save_log(log)
+
+try:
+    pygame.init()
+except:
+    exit()
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -129,9 +147,13 @@ save_log(log)
 
 while True :
     save_log(log)
-    for i in range(0,255):
-        rgb = current_color
-        pygame.draw.rect(display_surface, rgb, pygame.Rect(60, 785 + i, 50, 2))
+    try:
+        for i in range(0,255):
+            rgb = current_color
+            pygame.draw.rect(display_surface, rgb, pygame.Rect(60, 785 + i, 50, 2))
+    except ValueError:
+        current_color = BLACK
+        log += "Color error\n"
 
 
 
