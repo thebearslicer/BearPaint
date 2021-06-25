@@ -4,11 +4,19 @@ import os
 
 pygame.init()
 
+log = "BearPaint 3.2\n"
+
 path = "C:/bearpaint/images"
 try:
     os.makedirs(path)
 except:
-    pass
+    log += "C:/bearpaint/images already found\n"
+
+path = "C:/bearpaint/logs"
+try:
+    os.makedirs(path)
+except:
+    log += "C:/bearpaint/logs already found\n"
 
 
 WHITE = (255, 255, 255)
@@ -18,10 +26,14 @@ BLUE = (0, 30, 255)
 screen_size = (1920, 1080)
 
 name = input("Name?")
+log += "Filename: " + name + "\n"
+
 brush_size_width = int(input("Brush size width?"))
 brush_size_height = int(input("Brush size height"))
 eraser_size_width = int(input("Eraser size width?"))
 eraser_size_height = int(input("Eraser size height"))
+
+log += "Sizes: " + str(brush_size_width) + " " + str(brush_size_height) + " " +  str(eraser_size_width) + " " + str(eraser_size_height) + "\n"
 
 def draw_pixel_at_mouse(color, brush_size_width, brush_size_height, surface):
     mouse_x_pos, mouse_y_pos = pygame.mouse.get_pos()
@@ -39,6 +51,11 @@ def create_custom_color():
 
 def get_color_at_mouse():
     return display_surface.get_at((pygame.mouse.get_pos()))[:3]
+
+def save_log(log_string):
+    text_file = open("C:/bearpaint/logs/log.txt", "w")
+    text_file.write(log_string)
+    text_file.close()
 
 
 current_color = BLACK
@@ -108,7 +125,10 @@ for i in range(0, 255):
     rgb = red, green, blue
     pygame.draw.rect(display_surface, rgb, pygame.Rect(60, 535 + i, 50, 2))
 
+save_log(log)
+
 while True :
+    save_log(log)
     for i in range(0,255):
         rgb = current_color
         pygame.draw.rect(display_surface, rgb, pygame.Rect(60, 785 + i, 50, 2))
@@ -146,8 +166,11 @@ while True :
                 eraser_size_height = int(input("Eraser size height"))
 
             if pressed[pygame.K_q]:
-                Screenshot = pyautogui.screenshot(region=(110,0, 1810, 1080))
-                Screenshot.save('C:/bearpaint/images/' + name + '.png')
+                try:
+                    Screenshot = pyautogui.screenshot(region=(110,0, 1810, 1080))
+                    Screenshot.save('C:/bearpaint/images/' + name + '.png')
+                except:
+                    log += "Saving Error\n"
 
             if pressed[pygame.K_m]:
                 red = current_color[0]
@@ -161,9 +184,12 @@ while True :
                 current_color = new_red, new_green, new_blue
 
             if pressed[pygame.K_l]:
-                image_to_load_filename = input("Image to load?")
-                loaded_image = pygame.image.load("C:/bearpaint/images/" + image_to_load_filename)
-                display_surface.blit(loaded_image, pygame.mouse.get_pos())
+                try:
+                    image_to_load_filename = input("Image to load?")
+                    loaded_image = pygame.image.load("C:/bearpaint/images/" + image_to_load_filename)
+                    display_surface.blit(loaded_image, pygame.mouse.get_pos())
+                except:
+                    log += "Loading Error\n"
 
     pygame.display.update()
 
