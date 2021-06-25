@@ -187,10 +187,8 @@ while True :
                 current_color = get_color_at_mouse()
 
             if pressed[pygame.K_s]:
-                brush_size_width = int(input("Brush size width?"))
-                brush_size_height = int(input("Brush size height"))
-                eraser_size_width = int(input("Eraser size width?"))
-                eraser_size_height = int(input("Eraser size height"))
+                brush_size = int(input("Brush Size?"))
+                eraser_size = int(input("Eraser size"))
 
             if pressed[pygame.K_q]:
                 try:
@@ -227,8 +225,9 @@ while True :
                     first_pos_for_line = (0,0)
 
             elif first_pos_for_line == (0, 0):
-                first_pos_for_line = pygame.mouse.get_pos()
-                draw_pixel_at_mouse(GRAY, 8, display_surface)
+                if pressed[pygame.K_i]:
+                    first_pos_for_line = pygame.mouse.get_pos()
+                    draw_pixel_at_mouse(GRAY, 8, display_surface)
 
 
 
