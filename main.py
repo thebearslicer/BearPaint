@@ -1,6 +1,15 @@
 import pygame
+import pyautogui
+import os
 
 pygame.init()
+
+path = "C:/bearpaint/images"
+try:
+    os.makedirs(path)
+except:
+    pass
+
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -8,6 +17,7 @@ PINK = (240, 98, 145)
 BLUE = (0, 30, 255)
 screen_size = (1920, 1080)
 
+name = input("Name?")
 brush_size_width = int(input("Brush size width?"))
 brush_size_height = int(input("Brush size height"))
 eraser_size_width = int(input("Eraser size width?"))
@@ -135,6 +145,20 @@ while True :
                 eraser_size_width = int(input("Eraser size width?"))
                 eraser_size_height = int(input("Eraser size height"))
 
+            if pressed[pygame.K_q]:
+                Screenshot = pyautogui.screenshot(region=(110,0, 1810, 1080))
+                Screenshot.save('C:/bearpaint/images/' + name + '.png')
+
+            if pressed[pygame.K_m]:
+                red = current_color[0]
+                green = current_color[1]
+                blue = current_color[2]
+
+                color_to_blend_with = get_color_at_mouse()              #rgb mixing
+                new_red = (color_to_blend_with[0] + red) / 2
+                new_green = (color_to_blend_with[1] + green) / 2
+                new_blue = (color_to_blend_with[2] + blue) / 2
+                current_color = new_red, new_green, new_blue
 
     pygame.display.update()
 
