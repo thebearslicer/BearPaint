@@ -160,6 +160,11 @@ while True :
                 new_blue = (color_to_blend_with[2] + blue) / 2
                 current_color = new_red, new_green, new_blue
 
+            if pressed[pygame.K_l]:
+                image_to_load_filename = input("Image to load?")
+                loaded_image = pygame.image.load("C:/bearpaint/images/" + image_to_load_filename)
+                display_surface.blit(loaded_image, pygame.mouse.get_pos())
+
     pygame.display.update()
 
 
