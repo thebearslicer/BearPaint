@@ -1,4 +1,4 @@
-Welcome to BearPaint version 3.0
+Welcome to BearPaint version 3.1
 
 When running the exe you will be asked for some options
 
@@ -15,3 +15,5 @@ Press "S" to set a new brush/eraser size in the command line
 Press "Q" to save your painting to C:/bearpaint/images
 
 Press "M" to mix your current color with the one your mouse is over, the result of which is set as your new current color
+
+Press "L" to load in image from C:/bearpaint/images, make sure to include the file extension. 
