@@ -1,6 +1,6 @@
-Welcome to BearPaint version 3.3
+Welcome to BearPaint version 4
 
-When running the exe you will be asked for some options
+When running the exe you will have to set the brush and eraser sizes
 
 Left click uses the brush
 
@@ -17,3 +17,5 @@ Press "Q" to save your painting to C:/bearpaint/images
 Press "M" to mix your current color with the one your mouse is over, the result of which is set as your new current color
 
 Press "L" to load in image from C:/bearpaint/images, make sure to include the file extension. 
+
+Press "I" to place a point, press "I" again to draw a line between that point and your mouse curser
