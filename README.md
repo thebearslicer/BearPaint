@@ -1,4 +1,4 @@
-Welcome to BearPaint version 3.1
+Welcome to BearPaint version 3.2
 
 When running the exe you will be asked for some options
 
