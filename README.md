@@ -1,4 +1,4 @@
-Welcome to BearPaint version 4
+Welcome to BearPaint version 4.1
 
 When running the exe you will have to set the brush and eraser sizes
 
