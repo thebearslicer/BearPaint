@@ -1,12 +1,7 @@
 import os
 
-log = "BearPaint Linux 4.1\n"
+log = "BearPaint Linux 4.2\n"
 
-
-def save_log(log_string):
-    text_file = open("~/bearpaint/logs/log.txt", "w")
-    text_file.write(log_string)
-    text_file.close()
 
 path = "~/bearpaint/images\n"
 
@@ -20,6 +15,14 @@ try:
     os.makedirs(path)
 except:
     log += "~/bearpaint/logs already found\n"
+
+
+def save_log(log_string):
+    text_file = open("~/bearpaint/logs/log.txt", "w")
+    text_file.write(log_string)
+    text_file.close()
+
+
 
 
 try:
