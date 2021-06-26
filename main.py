@@ -1,6 +1,6 @@
 import os
 
-log = "BearPaint 3.3\n"
+log = "BearPaint 4.1\n"
 
 
 def save_log(log_string):
@@ -232,5 +232,3 @@ while True :
 
 
     pygame.display.update()
-
-
